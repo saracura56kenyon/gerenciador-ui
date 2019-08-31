@@ -3,6 +3,7 @@ import { PessoaService, PessoaFiltro } from '../pessoa.service';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -11,7 +12,9 @@ import { ErrorHandlerService } from 'app/core/error-handler.service';
 })
 export class PessoasPesquisaComponent implements OnInit {
 
-  ngOnInit() {  }
+  ngOnInit() {
+    this.title.setTitle('Pesquisa de Pessoas');
+  }
 
   totalRegistros = 0;
   filtro = new PessoaFiltro();
@@ -22,7 +25,8 @@ export class PessoasPesquisaComponent implements OnInit {
     private pessoaService: PessoaService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private title: Title
   ) {}
 
   pesquisar(pagina = 0) {
@@ -59,6 +63,19 @@ export class PessoasPesquisaComponent implements OnInit {
           this.grid.first = 0;
         }
         this.toasty.success('Pessoa excluída com sucesso!');
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  alteraStatus(pessoa: any): void {
+    const novoStatus = !pessoa.ativo;
+
+    this.pessoaService.mudaStatus(pessoa.codigo, novoStatus)
+      .then(() => {
+        const acao = novoStatus ? 'ativada' : 'desativada';
+
+        pessoa.ativo = novoStatus;
+        this.toasty.success(`Pessoa ${acao} com sucesso!`);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
