@@ -1,6 +1,5 @@
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { Router } from '@angular/router';
 
