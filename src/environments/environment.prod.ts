@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://crearestudio-ui.herokuapp.com/'
+  apiUrl: 'https://crearestudio-api.herokuapp.com/'
 };
