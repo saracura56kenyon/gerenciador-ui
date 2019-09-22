@@ -1,3 +1,4 @@
+import { RelatoriosService } from './../relatorios/relatorios.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
@@ -15,6 +16,8 @@ import { Title } from '@angular/platform-browser';
 import { AuthService } from 'app/seguranca/auth.service';
 import { JwtHelper } from 'angular2-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
+import { DashboardService } from './../dashboard/dashboard.service';
+import { CategoriaService } from 'app/categorias/categoria.service';
 
 registerLocaleData(localePt);
 
@@ -30,7 +33,7 @@ registerLocaleData(localePt);
   exports: [NavbarComponent, ToastyModule, ConfirmDialogModule],
   providers: [
     ErrorHandlerService,
-    LancamentoService, PessoaService, ConfirmationService, AuthService, Title, JwtHelper, { provide: LOCALE_ID , useValue: 'pt'}
+    LancamentoService, PessoaService, CategoriaService, DashboardService, RelatoriosService, ConfirmationService, AuthService, Title, JwtHelper, { provide: LOCALE_ID , useValue: 'pt'}
   ]
 })
 export class CoreModule { }
