@@ -17,6 +17,7 @@ import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { CategoriaService } from 'app/categorias/categoria.service';
+import { FileUploadModule, ProgressSpinnerModule } from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -33,6 +34,8 @@ import { CategoriaService } from 'app/categorias/categoria.service';
     SelectButtonModule,
     DropdownModule,
     CurrencyMaskModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
 
     SharedModule,
     LancamentosRoutingModule

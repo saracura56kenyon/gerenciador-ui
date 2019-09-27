@@ -29,14 +29,14 @@
                 <ng-template pTemplate="body" let-pessoa>
                     <tr>
                         <td>{{ pessoa.nome }}</td>
-                        <td>{{ pessoa.endereco.cidade }}</td>
-                        <td>{{ pessoa.endereco.estado }}</td>
+                        <td>{{ pessoa.endereco.cidade?.nome }}</td>
+                        <td>{{ pessoa.endereco.cidade?.estado.nome }}</td>
                         <td>
                             <a href="javascript:;" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'" tooltipPosition="top" (click)="alteraStatus(pessoa)">{{ pessoa.ativo ? 'Ativo' : 'Inativo' }}</a>
                         </td>
                         <td class="col-acoes">
-                            <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/pessoas', pessoa.codigo]"></button>
-                            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(pessoa)"></button>
+                            <button pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/pessoas', pessoa.codigo]"></button>
+                            <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(pessoa)"></button>
                         </td>
                     </tr>
                 </ng-template>

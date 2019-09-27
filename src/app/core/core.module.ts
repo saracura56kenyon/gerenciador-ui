@@ -1,3 +1,5 @@
+import { MoneyHttp } from './../seguranca/money.http';
+import { MessageService } from 'primeng/components/common/messageservice';
 import { RelatoriosService } from './../relatorios/relatorios.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -5,7 +7,6 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { ToastyModule } from 'ng2-toasty';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { LancamentoService } from 'app/lancamentos/lancamento.service';
@@ -14,10 +15,12 @@ import { RouterModule } from '@angular/router';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from 'app/seguranca/auth.service';
-import { JwtHelper } from 'angular2-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { DashboardService } from './../dashboard/dashboard.service';
 import { CategoriaService } from 'app/categorias/categoria.service';
+import { GrowlModule } from 'primeng/growl';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localePt);
 
@@ -25,15 +28,16 @@ registerLocaleData(localePt);
   imports: [
     CommonModule,
     RouterModule,
+    GrowlModule,
+    HttpClientModule,
 
-    ToastyModule.forRoot(),
     ConfirmDialogModule
   ],
   declarations: [NavbarComponent, PaginaNaoEncontradaComponent, NaoAutorizadoComponent],
-  exports: [NavbarComponent, ToastyModule, ConfirmDialogModule],
+  exports: [NavbarComponent, ConfirmDialogModule, GrowlModule],
   providers: [
-    ErrorHandlerService,
-    LancamentoService, PessoaService, CategoriaService, DashboardService, RelatoriosService, ConfirmationService, AuthService, Title, JwtHelper, { provide: LOCALE_ID , useValue: 'pt'}
+    ErrorHandlerService, MoneyHttp,
+    LancamentoService, PessoaService, CategoriaService, DashboardService, RelatoriosService, ConfirmationService, MessageService, AuthService, Title, JwtHelperService, { provide: LOCALE_ID , useValue: 'pt'}
   ]
 })
 export class CoreModule { }
